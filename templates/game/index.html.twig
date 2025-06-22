@@ -4,5 +4,16 @@
 
 {% block body %}
     <h1>game1</h1>
+    <link rel="stylesheet" href="/css/game.css">
+    <div class="game-center">
+        <table class="game-field">
+            {% for y in 0..9 %}
+                <tr>
+                    {% for x in 0..9 %}
+                        <td>&nbsp;</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
-

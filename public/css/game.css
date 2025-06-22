@@ -1,0 +1,16 @@
+table.game-field {
+    border-collapse: collapse;
+}
+table.game-field td {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #333;
+}
+.game-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
