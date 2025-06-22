@@ -10,6 +10,8 @@ services:
     depends_on:
       - php-fpm
   php-fpm:
-    image: php:8.3-fpm
+    build:
+      context: ./php-fpm
     volumes:
       - ../:/var/www/html
+    working_dir: /var/www/html
