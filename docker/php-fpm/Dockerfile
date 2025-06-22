@@ -16,4 +16,12 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | version=3.8.0 codename="alpine" bash
 RUN apk add symfony-cli
 
+# Установка Xdebug
+RUN apk add --no-cache $PHPIZE_DEPS linux-headers \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# Открываем порт для Xdebug
+EXPOSE 9003
+
 WORKDIR /var/www/html
