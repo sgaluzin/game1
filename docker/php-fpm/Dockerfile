@@ -16,7 +16,4 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | version=3.8.0 codename="alpine" bash
 RUN apk add symfony-cli
 
-# Копирование dev-конфига php в php.ini
-RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
-
 WORKDIR /var/www/html
