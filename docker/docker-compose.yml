@@ -16,5 +16,6 @@ services:
       context: ./php-fpm
     volumes:
       - ../:/var/www/html
-      - ./php-fpm/logs:/var/log/php-fpm
+      - ./php-fpm/logs/php-fpm:/var/log/php-fpm
+      - ./php-fpm/logs/game1:/var/log/game1
     working_dir: /var/www/html
