@@ -44,20 +44,39 @@ class GameService
 
     private function placeShips(GameField $field): void
     {
-        // Пример: 1 корабль на 4 клетки, 2 на 3 клетки, 3 на 2 клетки, 4 на 1 клетку
         $ships = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1];
         foreach ($ships as $size) {
             do {
-                $horizontal = rand(0, 1) === 1;
+                $horizontal = (bool)rand(0, 1);
                 $x = rand(0, $horizontal ? 10 - $size : 9);
                 $y = rand(0, $horizontal ? 9 : 10 - $size);
                 $positions = [];
                 for ($i = 0; $i < $size; $i++) {
-                    $positions[] = [$x + ($horizontal ? $i : 0), $y + ($horizontal ? 0 : $i)];
+                    $positions[] = $horizontal ? [$x + $i, $y] : [$x, $y + $i];
                 }
-            } while ($this->overlaps($positions, $field->getShips()));
-            $field->addShip(new Ship($positions));
+            } while (!$this->canPlaceShip($field, $positions));
+            $ship = new Ship($positions);
+            $field->addShip($ship);
         }
+    }
+
+    private function canPlaceShip(GameField $field, array $positions): bool
+    {
+        $occupied = [];
+        foreach ($field->getShips() as $ship) {
+            foreach ($ship->getPositions() as [$sx, $sy]) {
+                for ($dx = -1; $dx <= 1; $dx++) {
+                    for ($dy = -1; $dy <= 1; $dy++) {
+                        $occupied[($sx + $dx) . '_' . ($sy + $dy)] = true;
+                    }
+                }
+            }
+        }
+        foreach ($positions as [$x, $y]) {
+            if ($x < 0 || $x > 9 || $y < 0 || $y > 9) return false;
+            if (!empty($occupied[$x . '_' . $y])) return false;
+        }
+        return true;
     }
 
     private function overlaps(array $positions, array $ships): bool
@@ -79,4 +98,3 @@ class GameService
         $this->session->remove(self::SESSION_KEY);
     }
 }
-
