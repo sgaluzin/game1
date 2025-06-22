@@ -2,7 +2,10 @@
     "require": {
         "symfony/symfony": "^6.4",
         "symfony/http-kernel": "*",
-        "symfony/monolog-bundle": "^3.8"
+        "symfony/monolog-bundle": "^3.8",
+        "symfony/routing": "*",
+        "symfony/console": "*",
+        "symfony/framework-bundle": "*"
     },
     "autoload": {
         "psr-4": {
