@@ -1,12 +1,8 @@
-FROM php:8.3-fpm
+FROM php:8.3-fpm-alpine
 
 # Установка необходимых расширений и инструментов
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        unzip \
-        git \
-        zip \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk update \
+    && apk add --no-cache unzip git zip mc
 
 # Установка Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
