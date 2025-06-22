@@ -1,11 +1,16 @@
 table.game-field {
     border-collapse: collapse;
+    margin: 10px;
 }
 table.game-field td {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #888;
     text-align: center;
-    border: 1px solid #333;
+    vertical-align: middle;
+    background: #eaf6ff;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 .game-center {
     display: flex;
@@ -13,4 +18,47 @@ table.game-field td {
     align-items: center;
     min-height: 60vh;
 }
-
+.game-field td.ship {
+    background: #3a7bd5 !important;
+    box-shadow: 0 0 4px #1e5799;
+}
+.game-field td.shot {
+    background: #ffbaba !important;
+    position: relative;
+}
+.game-field td.shot::after {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #d32f2f;
+    opacity: 0.7;
+}
+.game-field td.ship.shot {
+    background: #d32f2f !important;
+    box-shadow: 0 0 8px #b71c1c;
+}
+.game-field td.hit {
+    background: #ffe066 !important;
+    position: relative;
+}
+.game-field td.hit::after {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #ffd700;
+    opacity: 0.8;
+}
+.game-controls {
+    margin-bottom: 20px;
+}
+.game-fields {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}

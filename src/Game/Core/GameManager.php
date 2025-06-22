@@ -35,6 +35,15 @@ class GameManager
         $this->playerTurn = !$this->playerTurn;
     }
 
+    public function getRandomPlayerShot(): array
+    {
+        do {
+            $x = rand(0, 9);
+            $y = rand(0, 9);
+        } while (in_array([$x, $y], $this->playerField->getShots()));
+        return [$x, $y];
+    }
+
     public function playerShoot(int $x, int $y): array
     {
         $result = $this->computerField->shoot($x, $y);
@@ -44,12 +53,11 @@ class GameManager
         return $result;
     }
 
-    public function computerShoot(): array
+    public function computerShoot(?int $x = null, ?int $y = null): array
     {
-        do {
-            $x = rand(0, 9);
-            $y = rand(0, 9);
-        } while (in_array([$x, $y], $this->playerField->getShots()));
+        if ($x === null || $y === null) {
+            [$x, $y] = $this->getRandomPlayerShot();
+        }
         $result = $this->playerField->shoot($x, $y);
         if (!$result['hit']) {
             $this->switchTurn();
@@ -62,4 +70,3 @@ class GameManager
         return $this->playerField->allShipsSunk() || $this->computerField->allShipsSunk();
     }
 }
-

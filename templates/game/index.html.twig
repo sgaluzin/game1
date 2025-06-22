@@ -1,19 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}game1{% endblock %}
+{% block title %}Морской бой{% endblock %}
 
 {% block body %}
-    <h1>game1</h1>
+    <h1>Морской бой</h1>
     <link rel="stylesheet" href="/css/game.css">
-    <div class="game-center">
-        <table class="game-field">
-            {% for y in 0..9 %}
-                <tr>
-                    {% for x in 0..9 %}
-                        <td>&nbsp;</td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
+    <div class="game-controls">
+        <button id="start-btn">Новая игра</button>
+        <button id="reset-btn">Сброс</button>
+        <span id="status"></span>
     </div>
+    <div class="game-fields">
+        <div>
+            <h2>Ваше поле</h2>
+            <table id="player-field" class="game-field"></table>
+        </div>
+        <div>
+            <h2>Поле компьютера</h2>
+            <table id="computer-field" class="game-field"></table>
+        </div>
+    </div>
+    <script src="/js/game.js"></script>
 {% endblock %}
