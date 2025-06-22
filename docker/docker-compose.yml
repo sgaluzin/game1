@@ -18,4 +18,5 @@ services:
       - ../:/var/www/html
       - ../logs/php-fpm:/var/log/php-fpm
       - ../logs/game1:/var/log/game1
+      - ./php-fpm/php:/usr/local/etc/php
     working_dir: /var/www/html
