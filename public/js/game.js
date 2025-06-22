@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const resetBtn = document.getElementById('reset-btn');
     let gameOver = false;
 
+    // Храним последние 5 статусов
+    let statusHistory = [];
+
     function createField(table, clickable) {
         table.innerHTML = '';
         for (let y = 0; y < 10; y++) {
@@ -73,7 +76,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function setStatus(text) {
-        status.textContent = text;
+        statusHistory.push(text);
+        if (statusHistory.length > 10) statusHistory = statusHistory.slice(-10);
+        status.innerHTML = statusHistory.map(s => `<div>${s}</div>`).join('');
     }
 
     function loadState() {
@@ -117,6 +122,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data && data.shooter === 'player' && data.result) {
                     if (data.result.hit) {
                         setStatus('Попадание!');
+                        if (data.result.sunk) {
+                            setStatus('Корабль потоплен!');
+                        }
                     } else {
                         setStatus('Мимо!');
                     }

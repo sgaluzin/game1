@@ -62,3 +62,16 @@ table.game-field td {
     gap: 40px;
     justify-content: center;
 }
+#status {
+    max-height: 180px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+#status div {
+    padding: 2px 0;
+}
