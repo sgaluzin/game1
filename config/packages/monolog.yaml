@@ -1,0 +1,8 @@
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "/var/log/game1/%kernel.environment%.log"
+            level: debug
+            channels: ["!event"]
+
